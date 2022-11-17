@@ -9,7 +9,7 @@ audio_stream = None
 
 access_key = "jBTDwtEFWJLP518MdPbIbh+5fIp1nk5VHB4sUp4f8hBMmLvykJSQQw=="
 try:
-    porcupine = pvporcupine.create(access_key, keywords=["picovoice", "blueberry", "alexa", "jarvis"])
+    porcupine = pvporcupine.create(access_key, keyword_paths=["/home/fuco/iot-psi3452/Iracema_pt_linux_v2_1_0.ppn"], model_path='/home/fuco/iot-psi3452/porcupine_params_pt.pv')
     pa = pyaudio.PyAudio()  
     audio_stream = pa.open(
         rate=porcupine.sample_rate,

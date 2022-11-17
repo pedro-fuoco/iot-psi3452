@@ -1,21 +1,22 @@
 [
     {
-        "id": "0bf26b336d1c227d",
+        "id": "98b504f3c635d20a",
         "type": "exec",
         "z": "4af8ddfb9cd212e3",
-        "command": "python3 ~/iot-psi3452/voice_to_command.py --access_key \"jBTDwtEFWJLP518MdPbIbh+5fIp1nk5VHB4sUp4f8hBMmLvykJSQQw==\" --context_path \"/home/fuco/iot-psi3452/smarthome.rhn\"",
+        "command": "python3 /home/fuco/iot-psi3452/wakeword.py",
         "addpay": "",
         "append": "",
         "useSpawn": "false",
         "timer": "10",
         "winHide": false,
         "oldrc": false,
-        "name": "RHINO",
-        "x": 500,
-        "y": 200,
+        "name": "Porcupine - Iracema",
+        "x": 240,
+        "y": 160,
         "wires": [
             [
-                "0ce83fe99af7340a"
+                "651093dd5c57100e",
+                "0bf26b336d1c227d"
             ],
             [],
             []
