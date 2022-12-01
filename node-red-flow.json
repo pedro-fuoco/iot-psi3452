@@ -2,24 +2,194 @@
     {
         "id": "98b504f3c635d20a",
         "type": "exec",
-        "z": "4af8ddfb9cd212e3",
+        "z": "ade1456e59f6c32d",
         "command": "python3 /home/fuco/iot-psi3452/wakeword.py",
         "addpay": "",
         "append": "",
         "useSpawn": "false",
-        "timer": "10",
+        "timer": "",
         "winHide": false,
         "oldrc": false,
         "name": "Porcupine - Iracema",
-        "x": 240,
-        "y": 160,
+        "x": 280,
+        "y": 100,
         "wires": [
             [
-                "651093dd5c57100e",
-                "0bf26b336d1c227d"
+                "e1359d554f3e4b49",
+                "c51284f356fcf5a0"
             ],
             [],
             []
         ]
+    },
+    {
+        "id": "e1359d554f3e4b49",
+        "type": "debug",
+        "z": "ade1456e59f6c32d",
+        "name": "Hotword verification",
+        "active": true,
+        "tosidebar": false,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 550,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "c51284f356fcf5a0",
+        "type": "exec",
+        "z": "ade1456e59f6c32d",
+        "command": "python3 ~/iot-psi3452/voice_to_command.py --access_key \"jBTDwtEFWJLP518MdPbIbh+5fIp1nk5VHB4sUp4f8hBMmLvykJSQQw==\" --context_path \"/home/fuco/iot-psi3452/iracema.rhn\" --model_path \"/home/fuco/iot-psi3452/rhino_params_pt.pv\"",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "6",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Porcupine - Rhino",
+        "x": 270,
+        "y": 200,
+        "wires": [
+            [
+                "7554b2d60f9617c1",
+                "ceec05af57c7a822"
+            ],
+            [],
+            [
+                "98b504f3c635d20a"
+            ]
+        ]
+    },
+    {
+        "id": "7554b2d60f9617c1",
+        "type": "debug",
+        "z": "ade1456e59f6c32d",
+        "name": "Command Verification",
+        "active": true,
+        "tosidebar": false,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 570,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "ceec05af57c7a822",
+        "type": "function",
+        "z": "ade1456e59f6c32d",
+        "name": "Extract intent from output",
+        "func": "if (msg.payload == ''){\n    return;\n}\nif (msg.payload[0] == 'l'){\n    msg.payload = \"ON\"\n}\nelse{\n    msg.payload = \"OFF\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 300,
+        "wires": [
+            [
+                "e2296dc5b73832f8",
+                "5ec00c28cbda212e"
+            ]
+        ]
+    },
+    {
+        "id": "e2296dc5b73832f8",
+        "type": "debug",
+        "z": "ade1456e59f6c32d",
+        "name": "Intent Verification",
+        "active": true,
+        "tosidebar": false,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 550,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "5ec00c28cbda212e",
+        "type": "mqtt out",
+        "z": "ade1456e59f6c32d",
+        "name": "",
+        "topic": "lights",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8ede3c1e320b4da4",
+        "x": 530,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "1cadfa15e05241ce",
+        "type": "inject",
+        "z": "ade1456e59f6c32d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 40,
+        "wires": [
+            [
+                "98b504f3c635d20a"
+            ]
+        ]
+    },
+    {
+        "id": "8ede3c1e320b4da4",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
     }
 ]

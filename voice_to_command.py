@@ -96,13 +96,6 @@ class RhinoDemo(Thread):
                 wav_file = wave.open(self._output_path, "w")
                 wav_file.setparams((1, 2, 16000, 512, "NONE", "NONE"))
 
-#            print(rhino.context_info)
-            print()
-
-            print("Using device: %s" % recorder.selected_device)
-            print("Listening...")
-            print()
-
             time.sleep(0.5)
             
             while True:
@@ -115,16 +108,12 @@ class RhinoDemo(Thread):
                 if is_finalized:
                     inference = rhino.get_inference()
                     if inference.is_understood:
-                        print('{')
-                        print("  intent : '%s'" % inference.intent)
-                        print('  slots : {')
+                        print("%s" % inference.intent)
                         for slot, value in inference.slots.items():
-                            print("    %s : '%s'" % (slot, value))
-                        print('  }')
-                        print('}\n')
+                            print("%s" % (value))
                         break
                     else:
-                        print("Didn't understand the command.\n")
+                        pass
 
         except pvrhino.RhinoInvalidArgumentError as e:
             args = (
