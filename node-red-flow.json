@@ -1,9 +1,17 @@
 [
     {
+        "id": "ade1456e59f6c32d",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "98b504f3c635d20a",
         "type": "exec",
         "z": "ade1456e59f6c32d",
-        "command": "python3 /home/fuco/iot-psi3452/wakeword.py",
+        "command": "python3 ~/iot-psi3452/wakeword.py",
         "addpay": "",
         "append": "",
         "useSpawn": "false",
@@ -123,7 +131,7 @@
         "type": "mqtt out",
         "z": "ade1456e59f6c32d",
         "name": "",
-        "topic": "lights",
+        "topic": "/iracema/luzQuarto",
         "qos": "",
         "retain": "",
         "respTopic": "",
@@ -132,7 +140,7 @@
         "correl": "",
         "expiry": "",
         "broker": "8ede3c1e320b4da4",
-        "x": 530,
+        "x": 570,
         "y": 380,
         "wires": []
     },

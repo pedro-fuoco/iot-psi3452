@@ -18,7 +18,7 @@ const char* mqttServer = "broker.hivemq.com"; //MQTT URL
 const char* mqttUserName = "use-auth-token";  // MQTT username
 const char* mqttPwd = "mqtt password";  // MQTT password
 const char* clientID = "username0079"; // client id username+0001
-const char* topic = "Tempdata"; //publish topic
+const char* topic = "/iracema/tempData"; //publish topic
 //parameters for using non-blocking delay
 unsigned long previousMillis = 0;
 const long interval = 5000;
@@ -43,7 +43,7 @@ void reconnect() {
   while (!client.connected()) {
     if (client.connect(clientID, mqttUserName, mqttPwd)) {
       Serial.println("MQTT connected");
-      client.subscribe("lights");
+      client.subscribe("/iracema/luzQuarto");
       Serial.println("Topic Subscribed");
     }
     else {
@@ -71,11 +71,11 @@ void callback(char*topic, byte* payload, unsigned int length) {
   Serial.println("-----------------------");
   Serial.println(data);
 if(data=="ON"){
-  Serial.println("LUZ DA SALA ON");
+  Serial.println("Luz do Quarto ON");
   digitalWrite(LED, HIGH);
 }
 else{
-  Serial.println("LUZ DA SALA OFF");
+  Serial.println("Luz do Quarto OFF");
   digitalWrite(LED, LOW);
 }
 }
